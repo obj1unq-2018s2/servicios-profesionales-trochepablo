@@ -5,6 +5,6 @@ class Universidad {
 	method provinciaDeLaUniversidad() { return provincia }
 	method provinciaDeLaUniversidad(prov) { provincia = prov }
 	
-	method horarioRecomendado() { return honorarios }
-	method horarioRecomendado(hono) { honorarios = hono }
+	method honorarioRecomendado() { return honorarios }
+	method honorarioRecomendado(hono) { honorarios = hono }
 }

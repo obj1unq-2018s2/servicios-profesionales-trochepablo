@@ -1,6 +1,73 @@
+import universidad.*
+import profesionales.*
+import empresaServicio.*
 
-test "testX" {
-
-	assert.that(true)
+describe "test servicio empresarial" {
+	const empresaServicio = new EmpresaServicio()
+	
+	const sanMartin = new Universidad()	
+	const rosario = new Universidad()
+	const corrientes = new Universidad()
+	const hurlingham = new Universidad()
+	
+	const juana = new ProfesionalVinculado()
+	const melina = new ProfesionalAsociado()
+	const rocio = new ProfesionalLibre()
+	const luciana = new ProfesionalLibre()
+	
+	fixture {
+		sanMartin.provinciaDeLaUniversidad("Buenos Aires")
+		sanMartin.honorarioRecomendado(3500)
+		rosario.provinciaDeLaUniversidad("Santa Fe")
+		rosario.honorarioRecomendado(2800)
+		corrientes.provinciaDeLaUniversidad("Corrientes")
+		corrientes.honorarioRecomendado(4200)
+		hurlingham.provinciaDeLaUniversidad("Buenos Aires")
+		hurlingham.honorarioRecomendado(8800)
+		
+		juana.universidad(rosario)
+		melina.universidad(corrientes)
+		rocio.universidad(hurlingham)
+		luciana.universidad(rosario)
+		
+		rocio.provinciasDondePuedeTrabajar("Santa Fe")
+		rocio.provinciasDondePuedeTrabajar("Córdoba")
+		rocio.provinciasDondePuedeTrabajar("Buenos Aires")
+		rocio.honorariosPorHora(5000)
+		
+		luciana.provinciasDondePuedeTrabajar("Santa Fe")
+		luciana.provinciasDondePuedeTrabajar("Entre Ríos")
+		luciana.honorariosPorHora(3200)
+		
+		empresaServicio.contratarProfesional(juana)
+		empresaServicio.contratarProfesional(melina)
+		empresaServicio.contratarProfesional(rocio)
+		empresaServicio.contratarProfesional(luciana)
+		empresaServicio.honorarioReferencia(3500)
+	}
+	
+	test "Unico profesional caro es Rocio"{
+		assert.equals(empresaServicio.profesionalesCaros(), [rocio])
+	}
+	
+	test "Universidades formadas"{
+		assert.equals(empresaServicio.universidadesFormadas(), [corrientes, rosario, hurlingham])
+	}
+	
+	test "profesional mas barato" {
+	  assert.equals(empresaServicio.profesionalBarato(), juana)	
+	}
+	
+	test "provincias cubiertas" {
+	  assert.that(empresaServicio.provinciaCubierta("Santa Fe"))	
+	  assert.that(empresaServicio.provinciaCubierta("Córdoba"))	
+	  assert.notThat(empresaServicio.provinciaCubierta("Misiones"))
+	}
+	
+	test "cantidad profesionales en universidad" {
+	  assert.equals(empresaServicio.cuntosProfesionalesDeUniversidad(rosario), 2)	
+	  assert.equals(empresaServicio.cuntosProfesionalesDeUniversidad(sanMartin), 0)
+	  assert.equals(empresaServicio.cuntosProfesionalesDeUniversidad(hurlingham), 1)
+	}
 
 }

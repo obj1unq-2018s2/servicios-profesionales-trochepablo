@@ -7,7 +7,7 @@ class ProfesionalAsociado {
 	method universidad() { return universidad }
 	method universidad(univ) { universidad = univ }
 	
-	method provinciasDondePuedeTrabajar() { return #{"Entre Ríos", "Corrientes", "Santa Fe"} }
+	method provinciasDondePuedeTrabajar() { return ["Entre Ríos", "Corrientes", "Santa Fe"] }
 	
 	method honorariosPorHora() { return 3000 }
 }
@@ -20,7 +20,7 @@ class ProfesionalVinculado {
 	method universidad() { return universidad }
 	method universidad(univ) { universidad = univ }
 	
-	method provinciasDondePuedeTrabajar() { return #{universidad.pronvinca()} }
+	method provinciasDondePuedeTrabajar() { return [universidad.provinciaDeLaUniversidad()]} 
 	
 	method honorariosPorHora() { return universidad.honorarioRecomendado() }
 }
@@ -29,14 +29,14 @@ class ProfesionalVinculado {
 // a esta clase le faltan atributos y métodos
 class ProfesionalLibre {
 	var universidad
-	var provincia
+	var provincias = []
 	var honorarios
 	
 	method universidad() { return universidad }
 	method universidad(univ) { universidad = univ }
 	
-	method provinciasDondePuedeTrabajar() { return provincia }
-	method provinciasDondePuedeTrabajar(prov) { provincia = prov }
+	method provinciasDondePuedeTrabajar() { return provincias }
+	method provinciasDondePuedeTrabajar(prov) { provincias.add(prov) }
 	
 	method honorariosPorHora() { return honorarios }
 	method honorariosPorHora(hono) { honorarios = hono }
